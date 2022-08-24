@@ -1,0 +1,218 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+			<div class="container">
+				<a class="navbar-brand" href="{{ path('main')}}">
+					<span>R</span>emy Ibnaiche</a>
+				<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="oi oi-menu"></span>
+					Menu
+				</button>
+
+				<div class="collapse navbar-collapse" id="ftco-nav">
+					<ul class="navbar-nav nav ml-auto">
+						<li class="nav-item">
+							<a href="#about-section" class="nav-link">
+								<span>À propos de moi</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#resume-section" class="nav-link">
+								<span>Compétences</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#projects-section" class="nav-link">
+								<span>Projets</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#contact-section" class="nav-link">
+								<span>Contact</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<section class="hero-wrap js-fullheight">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row no-gutters slider-text js-fullheight justify-content-center align-items-center">
+					<div class="col-lg-8 col-md-6 ftco-animate d-flex align-items-center">
+						<div class="text text-center">
+							<span class="subheading">{# Bonjour Je m'apelle #}</span>
+							<h1>Rémy Ibnaiche</h1>
+							<h2>Je suis
+								<span class="txt-rotate" data-period="2000" data-rotate='["{{rotateImploded}}"]'></span>
+							</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mouse">
+			<a href="#" class="mouse-icon">
+				<div class="mouse-wheel">
+					<span class="ion-ios-arrow-round-down"></span>
+				</div>
+			</a>
+		</div>
+	</body>
+</section>
+
+<section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+	<div class="container">
+		<div class="row d-flex no-gutters">
+			<div class="col-md-6 col-lg-6 d-flex">
+				<div class="img-about img d-flex align-items-stretch">
+					<div class="overlay"></div>
+					<div class="img d-flex align-self-stretch align-items-center" style="background-image:url({{ asset('download/')}}{{ aboutData.fileNamePhoto }});"></div>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-6 pl-md-5 py-5">
+				<div class="row justify-content-start pb-3">
+					<div class="col-md-12 heading-section ftco-animate">
+						<h1 class="big">About</h1>
+						<h2 class="mb-4">À propos de moi</h2>
+						<p>{{aboutData.description|raw}}</p>					
+					</div>
+				</div>
+				<div class="counter-wrap ftco-animate d-flex mt-md-3">
+					<div class="text">					
+						<p>
+							<a href="{{ asset('download/')}}{{ aboutData.fileNameCv }}" target="_blank" class="btn btn-primary py-3 px-3">Télécharger mon CV</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="ftco-section ftco-partner">
+	<div class="container">
+		<div class="row">
+			<div class="owl-carousel">
+				{% for technology in technologiesData %}
+					<div class="col-sm">
+						<img src="{{ asset('download/')}}{{ technology.imagePath }}" class="img-fluid">
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>
+<section class="ftco-section ftco-no-pb goto-here" id="resume-section">
+	<div class="container">
+		<div class="col-md-9">
+
+			<div id="page-3" class="page three">
+				<h2 class="heading">Compétences</h2>
+				<div class="row progress-circle mb-5">
+					{% for skill in skillsData %}
+						<div class="col-lg-4 mb-4">
+
+							<div class="bg-white rounded-lg shadow p-4">
+								<h2 class="h5 font-weight-bold text-center mb-4">{{skill.name}}</h2>
+								<div class="progress mx-auto" data-value='{{skill.percent}}'>
+									<span class="progress-left">
+										<span class="progress-bar border-primary"></span>
+									</span>
+									<span class="progress-right">
+										<span class="progress-bar border-primary"></span>
+									</span>
+									<div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+										<div class="h2 font-weight-bold">{{skill.percent}}<sup class="small">%</sup>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div></div></section><section class="ftco-section ftco-project" id="projects-section"><div class="container-fluid px-md-0">
+<div class="row no-gutters justify-content-center pb-5">
+	<div class="col-md-12 heading-section text-center ftco-animate">
+		<h1 class="big big-2">Projets</h1>
+		<h2 class="mb-4">Mes Projets</h2>
+		<p>Présentation de mes projets</p>
+	</div>
+</div>
+
+<div class="row no-gutters">
+	{% for project in projectsData %}
+		<div class="col-md-4">
+			<div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url({{ asset('download/')}}{{ project.photoPath }});">
+				<div class="overlay"></div>
+				<div class="text text-center p-4">
+					<h3>
+						<a href="{{ project.pagePath }}" target="_blank">{{project.name}}</a>
+					</h3>
+					<h3><a href="{{ project.gitPath }}" target="_blank">github link</a></h3>
+					<span>{{ project.description}}</span>					
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</div></div></section><section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter"><div class="container-fluid px-md-5">
+<div class="row d-md-flex align-items-center">
+	{% for summarNumber in summaryNumbersData %}
+		<div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+			<div class="block-18 shadow">
+				<div class="text">
+					<strong class="number" data-number="{{ summarNumber.numbers }}">0</strong>
+					<span>{{ summarNumber.name }}</span>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</div></div></section><section class="ftco-section contact-section ftco-no-pb" id="contact-section"><div class="container">
+<div class="row justify-content-center mb-5 pb-3">
+	<div class="col-md-7 heading-section text-center ftco-animate">
+		<h1 class="big big-2">Contact</h1>
+		<h2 class="mb-4">Contact</h2>
+	</div>
+</div></div><div class="row no-gutters block-9">
+<div class="col-md-12 order-md-last d-flex">
+	<div class="bg-light p-4 p-md-5 contact-form">
+		{% for message in app.flashes('success')%}
+			<div class='alert alert-success'>
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{% for message in app.flashes('error')%}
+			<div class='alert alert-danger'>
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% form_theme contactForm 'bootstrap_4_layout.html.twig' %}
+		{{ form_start(contactForm) }}
+		<div class="form-group">
+			{{ form_row(contactForm.name, {'attr': {'class': 'form-control' , 'placeholder' : 'Prénom et nom'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_row(contactForm.email, {'attr': {'class': 'form-control' , 'placeholder' : 'Email'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_row(contactForm.subject, {'attr': {'class': 'form-control' , 'placeholder' : 'Sujet'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_row(contactForm.body, {'attr': {'class': 'form-control' , 'placeholder' : 'Message'}}) }}
+		</div>
+		<div class="form-group">
+			{{ form_row(contactForm.save, {'attr': {'class': 'btn btn-primary py-3 px-5' , 'value' : 'Envoyer un message'}}) }}
+		</div>
+		{{ form_end(contactForm) }}
+	</div>
+</div></div></div></section>{% include 'inc/footer.html.twig' %}{% endblock %}

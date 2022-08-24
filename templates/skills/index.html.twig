@@ -1,0 +1,84 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+	{{ parent() }}Compétences
+{% endblock %}
+
+{% block body %}
+
+	<div class="card-header">
+		<i class="fas fa-table mr-1"></i>
+		Tableau des compétences
+		{% if is_granted('ROLE_ADMIN') %}
+			<a class="btn btn-info float-right" href="{{ path('admin_skills_new') }}">Ajouter une compétence</a>
+		{% else %}
+			<a class="btn btn-secondary float-right" href="#" data-toggle="tooltip" data-html="true" title="<b>UWAGA</b><br>Opcja niedostępna dla gościa">Ajouter une compétence</a>
+		{% endif %}
+
+	</div>
+
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Pourcentage</th>
+						<th style='width: 140px'>Date ajoutée</th>
+						<th style='width: 140px'>Date de modification</th>
+						<th style='width: 20px'></th>
+						<th style='width: 20px'></th>
+						<th style='width: 15px'></th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Nom</th>
+						<th>Pourcentage</th>
+						<th>Date ajoutée</th>
+						<th>Date de modification</th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
+				</tfoot>
+				<tbody>
+					{% for skill in skillsData %}
+						<tr>
+							<td>{{ skill.name }}</td>
+							<td>{{ skill.percent }}</td>
+							<td>{{ skill.uploadedAt|date('d.m.Y H:i:s') }}</td>
+							<td>{{ skill.modificatedAt|date('d.m.Y H:i:s') }}</td>
+							{% if is_granted('ROLE_ADMIN') %}
+								<td>
+									<a href="{{ path('admin_skills_edit' , { 'id': skill.id }) }}" class="btn btn-success">Editer</a>
+								</td>
+								<td>
+									<a href="{{ path('admin_skills_delete' , { 'id': skill.id }) }}" class="btn btn-danger">Suprimer</a>
+								</td>
+								<td>
+									{% if skill.isPublic == '1' %}
+										<input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" onchange="window.location.href='{{ path('admin_skills_set_visibility' , { 'id': skill.id , 'visibility' : '0'}) }}'"></td>
+								{% else %}
+									<input type="checkbox" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger" onchange="window.location.href='{{ path('admin_skills_set_visibility' , { 'id': skill.id , 'visibility' : '1'}) }}'"></td>
+							{% endif %}
+						{% else %}
+							<td>
+								<a href="#" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="<b>UWAGA</b><br>Opcja niedostępna dla gościa">Editer</a>
+							</td>
+							<td>
+								<a href="#" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="<b>UWAGA</b><br>Opcja niedostępna dla gościa">Suprimer</a>
+							</td>
+							{% if skill.isPublic == '1' %}
+								<td><input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-secondary" data-offstyle="outline-secondary"></td>
+							{% else %}
+								<td><input type="checkbox" data-toggle="toggle" data-onstyle="outline-secondary" data-offstyle="outline-secondary"></td>
+							{% endif %}
+						{% endif %}
+
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>{% endblock %}

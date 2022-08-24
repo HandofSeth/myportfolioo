@@ -1,0 +1,20 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}
+	{{ parent() }}Nouvelles technologies
+{% endblock %}
+
+{% block body %}
+	<div class="card-body">
+		SECTION Technologies
+		{% form_theme technologiesForm 'bootstrap_4_layout.html.twig' %}
+		{{ form_start(technologiesForm) }}
+		{{ form_row(technologiesForm.name) }}
+		{% if technologiesForm.image_path.vars.data != NULL %}
+			<img style='width: 440px' src="{{ asset('download/')}}{{ technologiesForm.image_path.vars.data }}">
+		{% endif %}
+		{{ form_row(technologiesForm.image_path) }}
+		{{ form_row(technologiesForm.submit) }}
+		{{ form_end(technologiesForm) }}
+	</div>
+{% endblock %}

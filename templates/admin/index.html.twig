@@ -1,0 +1,14 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}ADMIN CMS PANEL
+{% endblock %}
+
+{% block body %}
+
+	<div class="container-fluid">
+		<h1 class="mt-5">
+			<span>Welcome to</span><br>Portfolio5 CMS<br>Symfony  version:
+			{{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION')}}<br>PHP version:
+			{{phpversion}}</h1>
+	</div>
+{% endblock %}
